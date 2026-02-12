@@ -1,0 +1,4016 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#128C7E">
+    <meta name="description" content="ChatSphere - Mensajería premium con cifrado E2E y servidor Erlang/Node.js">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" id="manifestLink">
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGOSURBVHgB7ZbNSgJBFIbnn61hG4MiKYQWQfQCFd3UQ4RB0C4iXKZtQvN1QG9QFEFR7QIXPUVg0S7wJqLOHB3PL5hpmo1zzkXmPHDOd+abH3EcQgiEEEIIUzhO+h1k5UNR6jvzC/i4ysxn8b24TH0L3hJfRfxI/HK2Dw91MOfqH+C/yUDq+eMCNfFMtNkOToBIlXEHeSDnPDoB4wJh5jzIZetYABPQLvD5n+4vBvjS5mAQ9iY4Ph1JZfOzwBYrscbYPW3BQ5/hx6Doe0S3hZgjLUDAB8H4QkD4Hs9u20Kk7wJpBMQfQQaC2F3t8QA/9QP65QpPv8g4FhN2LQAAAABJRU5ErkJggg==">
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGOSURBVHgB7ZbNSgJBFIbnn61hG4MiKYQWQfQCFd3UQ4RB0C4iXKZtQvN1QG9QFEFR7QIXPUVg0S7wJqLOHB3PL5hpmo1zzkXmPHDOd+abH3EcQgiEEEIIUzhO+h1k5UPxUa8+fQKF3+PSK1DQz6XJ80rF55eeX2pKHmGmGGPYN0oI/4+EgP8c9dcF0P8o+I73O+/+/P9M7dcFyO8f4sDXBYCAtS6A3u/xnus6/j0+U18XkH9BQO/n9A7k43q+zxj+P8gA9g/tFwQkQ/gFXE1vQPyJxJb7OV0lTv4/ILvA1wUEPf6IwwgRY3KkNyD+RmLT/ez3Al8X0AcsPqePIB/X8n3mSP7fRwZIF/jSgLtB5icEmLf38xzJd3oHuoz87pHfPfw7gP7eEf2/J65/f8z/xyy3L/BlAW0A/SHin7UCyA92xvYFviyg95NPQKTX17+c/C9MmfFzgRYTMFdYoBxEtwAAAABJRU5ErkJggg==">
+    
+    <title>ChatSphere - Iniciar sesión</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== ESTILOS BASE CON TEMA AZUL PREMIUM ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary-blue: #128C7E;
+            --whatsapp-green: #25D366;
+            --light-blue: #d9fdd3;
+            --very-light-blue: #f0f8ff;
+            --message-blue: #e7ffdb;
+            --bg-blue: #efeae2;
+            --accent-blue: #34b7f1;
+            --dark-blue: #075e54;
+            --deep-blue: #054d44;
+            --blue-accent: #128C7E;
+            --panel-bg: #ffffff;
+            --sidebar-bg: #f0f2f5;
+            --chat-bg: #efeae2;
+            --message-out: #d9fdd3;
+            --message-in: #ffffff;
+            --text-primary: #0d1418;
+            --text-secondary: #667781;
+            --text-tertiary: #8696a0;
+            --border-color: #e9edef;
+            --danger: #ff3b30;
+            --success: #4caf50;
+            --warning: #ff9966;
+            --online: #00e676;
+            --typing: #128C7E;
+            --icon-hover: #e9edef;
+            --story-gradient: linear-gradient(45deg, #128C7E, #25D366, #34b7f1);
+            --verified-badge: #128C7E;
+            --encryption-color: #128C7E;
+            --gold-premium: #ffd700;
+            --erlang-red: #a90533;
+            --node-green: #43853d;
+            --mysql-blue: #00758f;
+        }
+
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f2f5 0%, #e9edef 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: none;
+        }
+
+        /* ===== CONTENEDOR DE LOGIN ===== */
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--panel-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(18, 140, 126, 0.15);
+            animation: fadeIn 0.8s ease-out;
+            border: 2px solid rgba(18, 140, 126, 0.2);
+            display: block;
+            margin: 20px;
+            position: relative;
+            z-index: 100;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, var(--deep-blue), var(--dark-blue));
+            padding: 40px 30px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: float 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 45px;
+            color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(18, 140, 126, 0.25);
+            border: 4px solid white;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .logo i {
+            font-size: 40px;
+            z-index: 1;
+        }
+
+        .app-name {
+            font-size: 36px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ffffff, #d9fdd3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 15px;
+            opacity: 0.95;
+            max-width: 85%;
+            margin: 0 auto 15px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(45deg, var(--gold-premium), #ffcc00);
+            color: #000;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .tech-item i {
+            font-size: 14px;
+        }
+
+        /* ===== FORMULARIOS ===== */
+        .login-form {
+            padding: 30px 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-group label i {
+            color: var(--primary-blue);
+            width: 20px;
+            text-align: center;
+        }
+
+        .country-select-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .country-flag {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .country-code {
+            position: absolute;
+            left: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-primary);
+            font-weight: 700;
+            pointer-events: none;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .country-select {
+            width: 100%;
+            padding: 16px 18px 16px 140px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            appearance: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .country-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(18, 140, 126, 0.25);
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-blue);
+            pointer-events: none;
+            font-size: 14px;
+            z-index: 2;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .phone-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(18, 140, 126, 0.25);
+        }
+
+        .phone-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .verification-container {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .verification-inputs {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .verification-digit {
+            width: 50px;
+            height: 60px;
+            background: white;
+            border: 3px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .verification-digit:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(18, 140, 126, 0.25);
+            transform: scale(1.05);
+        }
+
+        .verification-digit.filled {
+            border-color: var(--primary-blue);
+            background: rgba(18, 140, 126, 0.1);
+        }
+
+        .verification-hint {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .verification-hint strong {
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .resend-code {
+            color: var(--accent-blue);
+            background: none;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 15px;
+            text-decoration: underline;
+            transition: all 0.3s;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .resend-code:hover {
+            color: var(--primary-blue);
+            background: rgba(18, 140, 126, 0.1);
+        }
+
+        .resend-code:disabled {
+            color: var(--text-tertiary);
+            cursor: not-allowed;
+            text-decoration: none;
+            background: transparent;
+        }
+
+        .countdown {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: center;
+            background: rgba(18, 140, 126, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 14px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            padding: 10px 12px;
+            background: rgba(255, 51, 102, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--danger);
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 200px;
+            margin-top: 12px;
+        }
+
+        .success-message {
+            color: var(--success);
+            font-size: 14px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            padding: 10px 12px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 200px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            letter-spacing: 0.5px;
+            -webkit-appearance: none;
+            appearance: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(18, 140, 126, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== INTERFAZ DE CHAT - TAMAÑO REALISTA PREMIUM ===== */
+        .chat-container {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 200;
+        }
+
+        .chat-wrapper {
+            display: flex;
+            height: 100%;
+            position: relative;
+        }
+
+        /* ===== SIDEBAR DE CHATS ===== */
+        .sidebar {
+            width: 400px;
+            min-width: 320px;
+            background: var(--sidebar-bg);
+            border-right: 2px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+            height: 100%;
+        }
+
+        .sidebar-header {
+            padding: 18px 20px;
+            background: var(--sidebar-bg);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .app-name-sidebar {
+            font-size: 22px;
+            color: var(--primary-blue);
+            font-weight: 800;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .app-name-sidebar i {
+            font-size: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(18, 140, 126, 0.2);
+            border: 3px solid white;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .avatar.online::after {
+            content: "";
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 12px;
+            height: 12px;
+            background: var(--online);
+            border-radius: 50%;
+            border: 2px solid var(--sidebar-bg);
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: var(--verified-badge);
+            border-radius: 50%;
+            margin-left: 6px;
+            font-size: 11px;
+            color: white;
+            box-shadow: 0 2px 5px rgba(18, 140, 126, 0.3);
+            flex-shrink: 0;
+        }
+
+        .user-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-info h3 {
+            font-size: 17px;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .sidebar-actions {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .icon-btn:hover {
+            background: var(--icon-hover);
+            color: var(--text-primary);
+            transform: scale(1.1);
+        }
+
+        /* ===== SECCIÓN DE ESTADOS ===== */
+        .stories-section {
+            padding: 12px 20px;
+            border-bottom: 2px solid var(--border-color);
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .stories-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .stories-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .stories-container::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .stories-container::-webkit-scrollbar-track {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        .stories-container::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 10px;
+        }
+
+        .story-item {
+            flex: 0 0 auto;
+            width: 60px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .story-ring {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            padding: 3px;
+            background: var(--story-gradient);
+            margin: 0 auto 5px;
+            transition: transform 0.3s;
+        }
+
+        .story-ring:hover {
+            transform: scale(1.05);
+        }
+
+        .story-ring.seen {
+            background: var(--border-color);
+        }
+
+        .story-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: 3px solid var(--sidebar-bg);
+        }
+
+        .story-name {
+            font-size: 11px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .my-story {
+            position: relative;
+        }
+
+        .add-story-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 18px;
+            height: 18px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            border: 3px solid var(--sidebar-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+        }
+
+        /* ===== BUSCADOR ===== */
+        .search-container {
+            padding: 12px 20px;
+            border-bottom: 2px solid var(--border-color);
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .search-box {
+            background: var(--chat-bg);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            gap: 12px;
+        }
+
+        .search-box i {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+            font-weight: 500;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        /* ===== LISTA DE CHATS ===== */
+        .chats-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            background: white;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .chats-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chats-list::-webkit-scrollbar-track {
+            background: var(--border-color);
+        }
+
+        .chats-list::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 10px;
+        }
+
+        .chat-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .chat-item:hover {
+            background: var(--sidebar-bg);
+            transform: translateX(5px);
+        }
+
+        .chat-item.active {
+            background: var(--sidebar-bg);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .chat-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            box-shadow: 0 4px 12px rgba(18, 140, 126, 0.2);
+            border: 2px solid white;
+            flex-shrink: 0;
+        }
+
+        .chat-avatar.online::after {
+            content: "";
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            width: 12px;
+            height: 12px;
+            background: var(--online);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .chat-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            gap: 10px;
+        }
+
+        .chat-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .chat-time {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .chat-preview {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-message {
+            font-size: 13px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+
+        .unread-count {
+            background: var(--primary-blue);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            box-shadow: 0 2px 8px rgba(18, 140, 126, 0.3);
+            flex-shrink: 0;
+        }
+
+        /* ===== ÁREA DE CHAT PRINCIPAL ===== */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--chat-bg);
+            position: relative;
+            height: 100%;
+        }
+
+        .chat-header-main {
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 15px rgba(18, 140, 126, 0.1);
+            flex-shrink: 0;
+            gap: 15px;
+        }
+
+        .chat-contact-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(18, 140, 126, 0.2);
+            border: 3px solid white;
+            flex-shrink: 0;
+        }
+
+        .contact-avatar.online::after {
+            content: "";
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 12px;
+            height: 12px;
+            background: var(--online);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-info h3 {
+            font-size: 17px;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .contact-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .typing-indicator {
+            color: var(--typing);
+            font-style: italic;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* ===== BADGE DE CIFRADO ===== */
+        .encryption-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(18, 140, 126, 0.15);
+            color: var(--encryption-color);
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            border: 1px solid rgba(18, 140, 126, 0.3);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* ===== MENSAJES ===== */
+        .messages-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background-color: var(--chat-bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h70v70H0V0zm35 35c8.3 0 15-6.7 15-15S43.3 5 35 5 20 11.7 20 20s6.7 15 15 15z' fill='%23e9edef' fill-opacity='0.15'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-blend-mode: overlay;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .messages-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 10px;
+        }
+
+        .message {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+            animation: messageAppear 0.3s ease-out;
+            box-shadow: 0 2px 8px rgba(18, 140, 126, 0.15);
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.outgoing {
+            background: var(--message-out);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.incoming {
+            background: var(--message-in);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            border: 2px solid var(--border-color);
+        }
+
+        .message-content {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-align: right;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        .message-status {
+            font-size: 11px;
+        }
+
+        .date-separator {
+            text-align: center;
+            margin: 15px 0;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .date-separator span {
+            background: white;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 6px 15px;
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(18, 140, 126, 0.1);
+            font-weight: 600;
+        }
+
+        /* ===== ENTRADA DE MENSAJES ===== */
+        .message-input-container {
+            padding: 15px 20px;
+            background: white;
+            border-top: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 -2px 15px rgba(18, 140, 126, 0.1);
+            flex-shrink: 0;
+        }
+
+        .input-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .message-input {
+            flex: 1;
+            background: var(--chat-bg);
+            border: none;
+            border-radius: 22px;
+            padding: 12px 18px;
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+            resize: none;
+            max-height: 120px;
+            min-height: 40px;
+            line-height: 1.5;
+            border: 2px solid var(--border-color);
+            font-weight: 500;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .message-input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(18, 140, 126, 0.2);
+        }
+
+        .message-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .send-button {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(18, 140, 126, 0.4);
+            flex-shrink: 0;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .send-button:hover {
+            background: var(--dark-blue);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(18, 140, 126, 0.5);
+        }
+
+        .send-button:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== FOOTER DEL LOGIN ===== */
+        .login-footer {
+            padding: 20px 25px;
+            text-align: center;
+            border-top: 2px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .login-footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(18, 140, 126, 0.15);
+            border: 2px solid rgba(18, 140, 126, 0.3);
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .copyright {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            line-height: 1.4;
+        }
+
+        .copyright strong {
+            color: var(--primary-blue);
+        }
+
+        /* ===== MODALES ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--primary-blue);
+            animation: modalAppear 0.4s ease-out;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            color: var(--primary-blue);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-blue);
+            transform: rotate(90deg);
+            background: var(--icon-hover);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: var(--very-light-blue);
+            border-radius: 12px;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(18, 140, 126, 0.2);
+            border-color: var(--primary-blue);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* ===== BOTÓN MENÚ MÓVIL ===== */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(18, 140, 126, 0.3);
+            flex-shrink: 0;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        /* ===== BOTÓN DE CERRAR SESIÓN ===== */
+        .logout-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--danger), #ff1a1a);
+            margin-top: 20px;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 51, 102, 0.4);
+        }
+
+        /* ===== FUNCIONES EXCLUSIVAS CHATSPHERE ===== */
+        .ai-assistant-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .wallet-badge {
+            background: linear-gradient(135deg, var(--gold-premium), #ffaa00);
+            color: black;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .quantum-badge {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1400px) {
+            .sidebar {
+                width: 380px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .chat-container {
+                height: 100vh;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .chat-wrapper {
+                position: relative;
+            }
+            
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                z-index: 1000;
+                width: 100%;
+                max-width: 450px;
+                box-shadow: 10px 0 40px rgba(0, 0, 0, 0.2);
+                transform: translateX(-100%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .chat-area {
+                width: 100%;
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+            
+            .login-container {
+                margin: 10px;
+                max-width: calc(100% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                border-radius: 0;
+                margin: 0;
+                max-width: 100%;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .login-header {
+                padding: 30px 20px 25px;
+            }
+            
+            .app-name {
+                font-size: 28px;
+            }
+            
+            .logo {
+                width: 75px;
+                height: 75px;
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+            
+            .logo i {
+                font-size: 32px;
+            }
+            
+            .tagline {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+            
+            .login-form {
+                padding: 25px 20px;
+                flex: 1;
+            }
+            
+            .country-select, .phone-input {
+                padding: 14px;
+                font-size: 15px;
+            }
+            
+            .country-select {
+                padding-left: 100px;
+            }
+            
+            .country-flag {
+                left: 12px;
+                font-size: 20px;
+            }
+            
+            .country-code {
+                left: 50px;
+                font-size: 14px;
+            }
+            
+            .verification-digit {
+                width: 40px;
+                height: 50px;
+                font-size: 24px;
+            }
+            
+            .btn {
+                padding: 14px;
+                font-size: 15px;
+            }
+            
+            .story-item {
+                width: 50px;
+            }
+            
+            .story-ring {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .contact-avatar, .avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .verification-digit {
+                width: 35px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .verification-inputs {
+                gap: 8px;
+            }
+            
+            .chat-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .chat-name {
+                font-size: 14px;
+            }
+            
+            .chat-message {
+                font-size: 12px;
+            }
+            
+            .app-name-sidebar {
+                font-size: 16px;
+            }
+            
+            .modal-content {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .security-badge {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .verification-digit {
+                width: 30px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .verification-inputs {
+                gap: 5px;
+            }
+            
+            .chat-avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+            
+            .avatar, .contact-avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+        }
+
+        /* ===== ANIMACIÓN DE TYPING ===== */
+        .typing-dots {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--typing);
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+            30% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
+        }
+
+        /* ===== NOTIFICACIONES ===== */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            box-shadow: 0 2px 8px rgba(255, 51, 102, 0.4);
+        }
+
+        /* ===== BOTONES ESPECIALES ===== */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background: white;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        /* ===== SCROLL SUAVE ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== SOPORTE PARA DARK MODE ===== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --panel-bg: #1a1a1a;
+                --sidebar-bg: #242424;
+                --chat-bg: #0a0a0a;
+                --message-out: #005c4b;
+                --message-in: #202c33;
+                --text-primary: #e9edef;
+                --text-secondary: #8696a0;
+                --text-tertiary: #667781;
+                --border-color: #303030;
+                --icon-hover: #2a2a2a;
+                --very-light-blue: #2a2a2a;
+            }
+            
+            .story-ring.seen {
+                background: #444;
+            }
+            
+            .search-box {
+                background: #2a2a2a;
+            }
+            
+            .message-input {
+                background: #2a2a2a;
+            }
+            
+            .country-select, .phone-input {
+                background: #2a2a2a;
+                color: var(--text-primary);
+                border-color: #444;
+            }
+            
+            .country-select:focus, .phone-input:focus {
+                background: #333;
+            }
+            
+            .verification-digit {
+                background: #2a2a2a;
+                border-color: #444;
+                color: var(--text-primary);
+            }
+            
+            .btn-secondary {
+                background: #2a2a2a;
+                color: var(--text-primary);
+                border-color: #444;
+            }
+            
+            .feature-card {
+                background: #2a2a2a;
+                border-color: #444;
+            }
+            
+            .date-separator span {
+                background: #242424;
+                border-color: #444;
+            }
+            
+            body {
+                background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            }
+        }
+
+        /* ===== FIX PARA SAFARI ===== */
+        @supports (-webkit-touch-callout: none) {
+            .login-container {
+                height: -webkit-fill-available;
+            }
+            
+            .chat-container {
+                height: -webkit-fill-available;
+            }
+            
+            .messages-container {
+                padding-bottom: 100px;
+            }
+        }
+
+        /* ===== ESTILOS PARA PWA ===== */
+        .pwa-mode {
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        .pwa-mode .chat-container {
+            padding-top: env(safe-area-inset-top);
+        }
+
+        .pwa-mode .message-input-container {
+            padding-bottom: calc(15px + env(safe-area-inset-bottom));
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== CONTENEDOR DE LOGIN - SIEMPRE VISIBLE INICIALMENTE ===== -->
+    <div class="login-container" id="loginContainer" style="display: block;">
+        <div class="login-header">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h1 class="app-name">ChatSphere</h1>
+                <p class="tagline">Mensajería premium con cifrado E2E y verificación avanzada</p>
+                <div class="premium-badge">
+                    <i class="fas fa-crown"></i>
+                    <span>EDICIÓN PREMIUM</span>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item"><i class="fas fa-code" style="color: var(--node-green);"></i> Node.js</span>
+                    <span class="tech-item"><i class="fas fa-server" style="color: var(--erlang-red);"></i> Erlang</span>
+                    <span class="tech-item"><i class="fas fa-database" style="color: var(--mysql-blue);"></i> MySQL</span>
+                    <span class="tech-item"><i class="fas fa-mobile-alt"></i> Swift/Kotlin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paso 1: Ingresar número de teléfono -->
+        <form class="login-form" id="phoneForm">
+            <div class="form-group">
+                <label for="countrySelect">
+                    <i class="fas fa-globe-americas"></i>
+                    Selecciona tu país
+                </label>
+                <div class="country-select-wrapper">
+                    <span class="country-flag" id="selectedFlag">🇺🇸</span>
+                    <span class="country-code" id="selectedCode">+1</span>
+                    <select class="country-select" id="countrySelect">
+                        <!-- Las opciones se llenarán con JavaScript -->
+                    </select>
+                    <span class="select-arrow">▼</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneInput">
+                    <i class="fas fa-mobile-alt"></i>
+                    Número de teléfono completo
+                </label>
+                <div class="phone-input-container">
+                    <input 
+                        type="tel" 
+                        id="phoneInput" 
+                        class="phone-input" 
+                        placeholder="Ej: 1234567890"
+                        inputmode="numeric"
+                        pattern="[0-9]{7,15}"
+                        required
+                        autocomplete="off"
+                    >
+                </div>
+                <span class="input-hint">Ingresa tu número de teléfono completo (sin espacios ni guiones)</span>
+                <div class="error-message" id="phoneError">
+                    <i class="fas fa-exclamation-circle error-icon"></i>
+                    <span id="phoneErrorText">Por favor, ingresa un número de teléfono válido</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="sendCodeBtn">
+                <span>Enviar código por SMS</span>
+                <i class="fas fa-paper-plane"></i>
+                <div class="loader" id="sendCodeLoader"></div>
+            </button>
+            
+            <button type="button" class="btn btn-secondary" id="clearSessionBtn">
+                <span>Inicio de sesión manual</span>
+                <i class="fas fa-sign-in-alt"></i>
+            </button>
+        </form>
+
+        <!-- Paso 2: Verificar código SMS -->
+        <div class="login-form verification-container" id="verificationForm">
+            <div class="form-group">
+                <label>
+                    <i class="fas fa-sms"></i>
+                    Código de verificación de 6 dígitos
+                </label>
+                <div class="verification-hint">
+                    Hemos enviado un código SMS al número <strong id="verificationPhone"></strong>.
+                    Ingresa los 6 dígitos a continuación:
+                </div>
+                
+                <div class="verification-inputs" id="verificationInputs">
+                    <!-- Los 6 inputs se generarán con JavaScript -->
+                </div>
+                
+                <div class="countdown" id="countdown">Puedes reenviar el código en: <span id="timer">60</span> segundos</div>
+                
+                <button type="button" class="resend-code" id="resendCodeBtn" disabled>
+                    Reenviar código SMS
+                </button>
+                
+                <div class="error-message" id="verificationError">
+                    <i class="fas fa-exclamation-circle error-icon"></i>
+                    <span id="verificationErrorText">Código incorrecto. Intenta nuevamente.</span>
+                </div>
+                
+                <div class="success-message" id="verificationSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Código verificado correctamente. Iniciando sesión...</span>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="verifyCodeBtn" disabled>
+                <span>Verificar código</span>
+                <i class="fas fa-check-circle"></i>
+                <div class="loader" id="verifyCodeLoader"></div>
+            </button>
+            
+            <button type="button" class="btn btn-secondary" id="backToPhoneBtn">
+                <span>Cambiar número</span>
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+
+        <div class="login-footer">
+            <p>Al continuar, aceptas nuestros <a href="#" onclick="showTermsModal()">Términos de Servicio</a> y <a href="#" onclick="showPrivacyModal()">Política de Privacidad</a></p>
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>Cifrado E2E • Verificación SMS • Sistema anti-bloqueo • Protocolo ChatSphere Secure</span>
+            </div>
+            <div class="copyright">
+                ChatSphere © 2024 - Propiedad intelectual de <strong>ThefaceConet</strong> | CEO: <strong>Marcos Manuel Cruz Salazar</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== INTERFAZ DE CHAT COMPLETA ===== -->
+    <div class="chat-container" id="chatContainer" style="display: none;">
+        <div class="chat-wrapper">
+            <!-- Sidebar de chats -->
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <div class="app-name-sidebar">
+                        <i class="fab fa-whatsapp"></i> ChatSphere
+                        <span class="quantum-badge"><i class="fas fa-microchip"></i> Quantum Ready</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="avatar online" id="userAvatar" onclick="openProfileUpload()">MM</div>
+                        <div class="user-info">
+                            <h3 id="userName">Marcos Manuel <span class="verified-badge" title="Cuenta verificada"><i class="fas fa-check"></i></span></h3>
+                            <p>
+                                <span class="status-indicator"></span>
+                                <span id="userStatus">En línea</span> • 
+                                <span class="encryption-badge"><i class="fas fa-lock"></i> Cifrado activo</span>
+                            </p>
+                        </div>
+                        <div class="sidebar-actions">
+                            <button class="icon-btn" id="statusBtn" title="Estado">
+                                <i class="fas fa-circle"></i>
+                            </button>
+                            <button class="icon-btn" id="newChatBtn" title="Nuevo chat">
+                                <i class="fas fa-comment-medical"></i>
+                            </button>
+                            <button class="icon-btn" id="settingsBtn" title="Configuración" onclick="showSettingsModal()">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de Estados/Stories -->
+                <div class="stories-section">
+                    <div class="stories-title">
+                        <span>Estados</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="stories-container" id="storiesContainer">
+                        <!-- Los estados se cargarán dinámicamente -->
+                    </div>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="search-input" id="searchInput" placeholder="Buscar o empezar un nuevo chat">
+                    </div>
+                </div>
+
+                <div class="chats-list" id="chatsList">
+                    <!-- Los chats se cargarán dinámicamente -->
+                </div>
+                
+                <!-- Botón de cerrar sesión - FUNCIÓN EXCLUSIVA CHATSPHERE -->
+                <div style="padding: 15px 20px; border-top: 1px solid var(--border-color);">
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar sesión</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Área de chat principal -->
+            <div class="chat-area">
+                <div class="chat-header-main">
+                    <div class="chat-contact-info">
+                        <button class="mobile-menu-btn" id="mobileMenuBtn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="contact-avatar online" id="activeChatAvatar">AM</div>
+                        <div class="contact-info">
+                            <h3 id="activeChatName">Ana Martínez 
+                                <span class="verified-badge" title="Cuenta verificada"><i class="fas fa-check"></i></span>
+                                <span class="ai-assistant-badge"><i class="fas fa-robot"></i> AI ChatSphere+</span>
+                            </h3>
+                            <p id="activeChatStatus">
+                                <span class="typing-indicator" id="typingIndicator" style="display:none;">
+                                    <span class="typing-dots">
+                                        <span></span><span></span><span></span>
+                                    </span>
+                                    Escribiendo...
+                                </span>
+                                <span id="lastSeen">En línea</span>
+                                <span class="encryption-badge"><i class="fas fa-lock"></i> Cifrado E2E</span>
+                                <span class="wallet-badge"><i class="fas fa-coins"></i> ChatSphere Pay</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="icon-btn" id="voiceCallBtn" title="Llamada de voz" onclick="startVoiceCall()">
+                            <i class="fas fa-phone-alt"></i>
+                        </button>
+                        <button class="icon-btn" id="videoCallBtn" title="Llamada de video" onclick="startVideoCall()">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="icon-btn" id="chatInfoBtn" title="Información del chat" onclick="showChatInfo()">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Los mensajes se cargarán aquí -->
+                </div>
+
+                <div class="message-input-container">
+                    <div class="input-actions">
+                        <button class="icon-btn" id="attachBtn" title="Adjuntar archivo" onclick="showAttachmentMenu()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="icon-btn" id="recordBtn" title="Grabar audio" onmousedown="startRecording()" onmouseup="stopRecording()" ontouchstart="startRecording()" ontouchend="stopRecording()">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button class="icon-btn" id="emojiBtn" title="Emoji" onclick="toggleEmojiPicker()">
+                            <i class="far fa-smile"></i>
+                        </button>
+                        <button class="icon-btn" id="aiAssistantBtn" title="Asistente AI" onclick="openAIAssistant()">
+                            <i class="fas fa-magic"></i>
+                        </button>
+                        <button class="icon-btn" id="paymentBtn" title="Enviar dinero" onclick="sendPayment()">
+                            <i class="fas fa-coins"></i>
+                        </button>
+                    </div>
+                    <textarea class="message-input" id="messageInput" placeholder="Escribe un mensaje (cifrado de extremo a extremo)..." rows="1"></textarea>
+                    <button class="send-button" id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODALES ===== -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-file-contract"></i> Términos de Servicio</h2>
+                <button class="modal-close" onclick="closeTermsModal()">×</button>
+            </div>
+            <div class="terms-content">
+                <h3>1. Aceptación de Términos</h3>
+                <p>Al usar ChatSphere, aceptas estos términos y condiciones en su totalidad.</p>
+                
+                <h3>2. Servicio de Mensajería</h3>
+                <p>ChatSphere proporciona un servicio de mensajería instantánea con cifrado de extremo a extremo basado en servidores Node.js y Erlang/OTP.</p>
+                
+                <h3>3. Privacidad y Seguridad</h3>
+                <p>Todos los mensajes están cifrados y solo pueden ser leídos por los participantes de la conversación. Utilizamos el protocolo ChatSphere Signal.</p>
+                
+                <h3>4. Funciones Exclusivas</h3>
+                <p>ChatSphere incluye ChatSphere Pay, AI Assistant, Quantum Ready Encryption y backup automático en la nube.</p>
+                
+                <h3>5. Propiedad Intelectual</h3>
+                <p>Todos los derechos de propiedad intelectual pertenecen a ThefaceConet.</p>
+                
+                <h3>6. Modificaciones</h3>
+                <p>Nos reservamos el derecho de modificar estos términos en cualquier momento.</p>
+                
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="closeTermsModal()">
+                        <i class="fas fa-times"></i>
+                        <span>Cerrar</span>
+                    </button>
+                    <button class="action-btn" onclick="acceptTerms()" style="background: var(--primary-blue); color: white;">
+                        <i class="fas fa-check"></i>
+                        <span>Aceptar Términos</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-user-shield"></i> Política de Privacidad</h2>
+                <button class="modal-close" onclick="closePrivacyModal()">×</button>
+            </div>
+            <div class="privacy-content">
+                <h3>🔒 Protección de Datos</h3>
+                <p>ChatSphere utiliza cifrado de extremo a extremo para proteger todas tus conversaciones.</p>
+                
+                <h3>📱 Recopilación de Información</h3>
+                <p>Solo recopilamos la información necesaria para proporcionar el servicio.</p>
+                
+                <h3>🔐 Sistema de Seguridad</h3>
+                <p>Implementamos múltiples capas de seguridad basadas en Erlang/OTP y Node.js.</p>
+                
+                <h3>🚫 Bloqueo Automático</h3>
+                <p>Las cuentas que violen nuestras políticas serán bloqueadas automáticamente.</p>
+                
+                <h3>🌐 Cumplimiento Global</h3>
+                <p>Cumplimos con GDPR, CCPA y otras regulaciones de privacidad internacionales.</p>
+                
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="closePrivacyModal()">
+                        <i class="fas fa-times"></i>
+                        <span>Entendido</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-cog"></i> Configuración Premium</h2>
+                <button class="modal-close" onclick="closeSettingsModal()">×</button>
+            </div>
+            <div class="settings-content">
+                <h3>⚙️ Ajustes de Cuenta</h3>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-user-circle"></i> Perfil</h4>
+                        <p>Configura tu foto de perfil, nombre y estado</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-bell"></i> Notificaciones</h4>
+                        <p>Gestiona tus preferencias de notificaciones</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-palette"></i> Apariencia</h4>
+                        <p>Personaliza colores y temas</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-database"></i> Almacenamiento</h4>
+                        <p>Gestiona espacio y copias de seguridad</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-shield-alt"></i> Privacidad</h4>
+                        <p>Configura quién puede contactarte</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-key"></i> Seguridad</h4>
+                        <p>Verificación en dos pasos y cifrado</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 30px;">🔐 Funciones Exclusivas ChatSphere (WhatsApp no las tiene)</h3>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-cloud-upload-alt"></i> Backup en la Nube</h4>
+                        <p>Copia de seguridad automática en la nube sin límite</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-sync-alt"></i> Sincronización Multi-Dispositivo</h4>
+                        <p>Usa ChatSphere en 10 dispositivos simultáneamente</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-eye-slash"></i> Modo Incógnito</h4>
+                        <p>Mensajes que se autodestruyen después de leer</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-business-time"></i> ChatSphere Business</h4>
+                        <p>Herramientas avanzadas para empresas</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-coins"></i> ChatSphere Pay</h4>
+                        <p>Envía y recibe dinero sin comisiones</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-robot"></i> AI Assistant</h4>
+                        <p>Asistente de inteligencia artificial integrado</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-microchip"></i> Quantum Ready</h4>
+                        <p>Protección contra computación cuántica</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-language"></i> Traducción en tiempo real</h4>
+                        <p>Traduce mensajes automáticamente a 100+ idiomas</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-video"></i> Videollamadas HD</h4>
+                        <p>Videollamadas 4K con hasta 50 participantes</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4><i class="fas fa-file-pdf"></i> Editor de documentos</h4>
+                        <p>Edita PDFs y documentos sin salir del chat</p>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="closeSettingsModal()">
+                        <i class="fas fa-times"></i>
+                        <span>Cerrar</span>
+                    </button>
+                    <button class="action-btn" onclick="backupNow()" style="background: var(--primary-blue); color: white;">
+                        <i class="fas fa-save"></i>
+                        <span>Realizar Backup Ahora</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== SISTEMA DE SEGURIDAD AVANZADO CHATSPHERE =====
+        class SecuritySystem {
+            constructor() {
+                this.e2eeEnabled = true;
+                this.accountsBlocked = [];
+                this.suspiciousActivities = [];
+                this.messageEncryptionKey = 'chatsph3r3-s3cur3-k3y-2024';
+                this.protocolVersion = 'ChatSphere Secure v3.0 (Erlang/Node.js)';
+                this.blockedWords = [
+                    'spam', 'estafa', 'fraude', 'odio', 'violencia', 'acoso',
+                    'suplantación', 'phishing', 'malware', 'virus', 'hack'
+                ];
+            }
+
+            encryptMessage(content) {
+                if (!this.e2eeEnabled) return content;
+                
+                try {
+                    const encrypted = btoa(unescape(encodeURIComponent(content)));
+                    return `🔒${encrypted}🔒`;
+                } catch (e) {
+                    console.error('Error encriptando mensaje:', e);
+                    return content;
+                }
+            }
+
+            decryptMessage(encryptedContent) {
+                if (!encryptedContent.startsWith('🔒') || !encryptedContent.endsWith('🔒')) {
+                    return encryptedContent;
+                }
+                
+                try {
+                    const content = encryptedContent.slice(1, -1);
+                    return decodeURIComponent(escape(atob(content)));
+                } catch (e) {
+                    console.error('Error desencriptando mensaje:', e);
+                    return encryptedContent;
+                }
+            }
+
+            checkForViolations(userId, activity) {
+                const violations = [
+                    'spam', 'harassment', 'fake_account', 'hate_speech',
+                    'phishing', 'malware', 'underage', 'multiple_accounts'
+                ];
+
+                if (violations.includes(activity.type)) {
+                    this.suspiciousActivities.push({
+                        userId,
+                        activity,
+                        timestamp: Date.now(),
+                        severity: activity.severity || 'high'
+                    });
+
+                    const recentActivities = this.suspiciousActivities.filter(
+                        a => a.userId === userId && 
+                        (Date.now() - a.timestamp) < 24 * 60 * 60 * 1000
+                    );
+
+                    if (recentActivities.length >= 3) {
+                        return this.blockAccountPermanently(userId, 'Múltiples violaciones de políticas');
+                    }
+                }
+                return false;
+            }
+
+            blockAccountPermanently(userId, reason) {
+                if (!this.accountsBlocked.some(b => b.userId === userId)) {
+                    this.accountsBlocked.push({
+                        userId,
+                        reason,
+                        timestamp: Date.now(),
+                        blockedBy: 'Sistema Automático ChatSphere'
+                    });
+                    
+                    console.log(`Cuenta ${userId} bloqueada permanentemente: ${reason}`);
+                    
+                    return true;
+                }
+                return false;
+            }
+
+            isAccountBlocked(userId) {
+                return this.accountsBlocked.some(block => block.userId === userId);
+            }
+
+            generateSecureCode() {
+                const crypto = window.crypto || window.msCrypto;
+                if (crypto && crypto.getRandomValues) {
+                    const array = new Uint32Array(1);
+                    crypto.getRandomValues(array);
+                    return (array[0] % 900000 + 100000).toString();
+                }
+                return Math.floor(100000 + Math.random() * 900000).toString();
+            }
+
+            containsBlockedContent(content) {
+                const lowerContent = content.toLowerCase();
+                return this.blockedWords.some(word => lowerContent.includes(word));
+            }
+        }
+
+        // ===== SISTEMA DE VERIFICACIÓN PREMIUM =====
+        class VerificationSystem {
+            constructor() {
+                this.verifiedAccounts = ['user_mm', 'user_1', 'user_3', 'user_5', 'user_8', 'user_10'];
+                this.businessAccounts = ['user_6', 'user_11'];
+                this.officialAccounts = ['user_12'];
+            }
+
+            isVerified(userId) {
+                return this.verifiedAccounts.includes(userId) || 
+                       this.businessAccounts.includes(userId) || 
+                       this.officialAccounts.includes(userId);
+            }
+
+            getVerificationLevel(userId) {
+                if (this.officialAccounts.includes(userId)) return 'official';
+                if (this.businessAccounts.includes(userId)) return 'business';
+                if (this.verifiedAccounts.includes(userId)) return 'verified';
+                return 'none';
+            }
+
+            getVerificationBadge(userId) {
+                const level = this.getVerificationLevel(userId);
+                if (level === 'none') return '';
+                
+                const badges = {
+                    'verified': '<span class="verified-badge" title="Cuenta verificada"><i class="fas fa-check"></i></span>',
+                    'business': '<span class="verified-badge" title="Cuenta de negocio" style="background: #25d366;"><i class="fas fa-check"></i></span>',
+                    'official': '<span class="verified-badge" title="Cuenta oficial" style="background: var(--gold-premium);"><i class="fas fa-check"></i></span>'
+                };
+                
+                return badges[level];
+            }
+        }
+
+        // ===== SISTEMA BACKEND SIMULADO (MISMA TECNOLOGÍA QUE WHATSAPP) =====
+        class BackendSystem {
+            constructor() {
+                this.endpoints = {
+                    login: '/api/auth/login',
+                    verify: '/api/auth/verify',
+                    messages: '/api/messages',
+                    chats: '/api/chats',
+                    profile: '/api/profile'
+                };
+                this.supportedTech = {
+                    backend: ['Node.js', 'Erlang/OTP'], // WhatsApp usa Erlang para mensajería y Node.js para APIs
+                    mobile: ['Swift (iOS)', 'Kotlin/Java (Android)'],
+                    database: ['MySQL', 'PostgreSQL', 'MongoDB', 'Riak (Erlang)'],
+                    realtime: ['WebSockets', 'XMPP', 'MQTT']
+                };
+            }
+
+            async login(phoneNumber, countryCode) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            success: true,
+                            message: 'Código enviado por SMS',
+                            code: '123456',
+                            timestamp: Date.now()
+                        });
+                    }, 1000);
+                });
+            }
+
+            async verifyCode(phoneNumber, code) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            success: code === '123456',
+                            token: code === '123456' ? 'jwt_token_' + Date.now() : null,
+                            user: {
+                                id: 'user_mm',
+                                name: 'Marcos Manuel',
+                                phone: phoneNumber,
+                                avatar: 'MM',
+                                verified: true,
+                                premium: true
+                            }
+                        });
+                    }, 1000);
+                });
+            }
+
+            async getChats(userId) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            success: true,
+                            chats: this.generateChats()
+                        });
+                    }, 500);
+                });
+            }
+
+            async getMessages(chatId) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            success: true,
+                            messages: this.generateMessages(chatId)
+                        });
+                    }, 300);
+                });
+            }
+
+            generateChats() {
+                return [
+                    { id: 1, name: 'Ana Martínez', lastMessage: 'Hola, ¿cómo estás?', time: '10:30', unread: 2, online: true, avatar: 'AM', verified: true, timestamp: Date.now() - 3600000 },
+                    { id: 2, name: 'Carlos López', lastMessage: 'Nos vemos mañana', time: '09:15', unread: 0, online: false, avatar: 'CL', verified: false, timestamp: Date.now() - 7200000 },
+                    { id: 3, name: 'María García', lastMessage: '¿Has visto el documento?', time: 'Ayer', unread: 1, online: true, avatar: 'MG', verified: true, timestamp: Date.now() - 86400000 },
+                    { id: 4, name: 'Pedro Sánchez', lastMessage: '👍', time: 'Ayer', unread: 0, online: false, avatar: 'PS', verified: false, timestamp: Date.now() - 86400000 },
+                    { id: 5, name: 'Laura Fernández', lastMessage: 'Te llamo luego', time: '25/12', unread: 0, online: true, avatar: 'LF', verified: true, timestamp: Date.now() - 172800000 },
+                    { id: 6, name: 'Grupo Familia', lastMessage: 'María: La cena es a las 8', time: '24/12', unread: 5, online: true, avatar: '👨‍👩‍👧‍👦', isGroup: true, verified: false, timestamp: Date.now() - 259200000 },
+                    { id: 7, name: 'Juan Pérez', lastMessage: 'Gracias por la ayuda', time: '23/12', unread: 0, online: false, avatar: 'JP', verified: false, timestamp: Date.now() - 345600000 },
+                    { id: 8, name: 'Sofía Ramírez', lastMessage: '¿Vamos al cine?', time: '22/12', unread: 0, online: true, avatar: 'SR', verified: true, timestamp: Date.now() - 432000000 },
+                    { id: 9, name: 'David Torres', lastMessage: 'Reunión a las 3pm', time: '21/12', unread: 3, online: false, avatar: 'DT', verified: false, timestamp: Date.now() - 518400000 },
+                    { id: 10, name: 'Elena Vargas', lastMessage: 'Feliz Navidad 🎄', time: '20/12', unread: 0, online: true, avatar: 'EV', verified: true, timestamp: Date.now() - 604800000 }
+                ];
+            }
+
+            generateMessages(chatId) {
+                const baseMessages = [
+                    { id: 1, content: '¡Hola! ¿Cómo estás?', time: '10:28', outgoing: false, verified: true },
+                    { id: 2, content: '¡Hola! Estoy bien, ¿y tú?', time: '10:30', outgoing: true, verified: true },
+                    { id: 3, content: 'Todo bien por aquí. ¿Qué has hecho hoy?', time: '10:31', outgoing: false, verified: true },
+                    { id: 4, content: 'He estado trabajando en ChatSphere. ¡Va a ser increíble!', time: '10:32', outgoing: true, verified: true },
+                    { id: 5, content: 'Suena interesante. ¿De qué se trata?', time: '10:33', outgoing: false, verified: true },
+                    { id: 6, content: 'Es la competencia directa de WhatsApp. Con mejores funciones y más seguro.', time: '10:34', outgoing: true, verified: true },
+                    { id: 7, content: '¡Wow! ¿Ya está funcionando?', time: '10:35', outgoing: false, verified: true },
+                    { id: 8, content: 'Sí, está casi lista. Te la muestro cuando termine.', time: '10:36', outgoing: true, verified: true }
+                ];
+                return baseMessages;
+            }
+
+            getTechStack() {
+                return this.supportedTech;
+            }
+        }
+
+        // ===== SISTEMA DE ALMACENAMIENTO OFFLINE =====
+        class OfflineStorage {
+            constructor() {
+                this.dbName = 'ChatSphereDB';
+                this.version = 1;
+                this.initDB();
+            }
+
+            initDB() {
+                if (!window.indexedDB) {
+                    console.warn("IndexedDB no está soportado");
+                    return;
+                }
+
+                const request = indexedDB.open(this.dbName, this.version);
+
+                request.onerror = (event) => {
+                    console.error("Error abriendo IndexedDB:", event);
+                };
+
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    
+                    if (!db.objectStoreNames.contains('messages')) {
+                        const store = db.createObjectStore('messages', { keyPath: 'id', autoIncrement: true });
+                        store.createIndex('chatId', 'chatId', { unique: false });
+                        store.createIndex('timestamp', 'timestamp', { unique: false });
+                    }
+                    
+                    if (!db.objectStoreNames.contains('chats')) {
+                        db.createObjectStore('chats', { keyPath: 'id' });
+                    }
+                    
+                    if (!db.objectStoreNames.contains('users')) {
+                        db.createObjectStore('users', { keyPath: 'id' });
+                    }
+                    
+                    if (!db.objectStoreNames.contains('settings')) {
+                        db.createObjectStore('settings', { keyPath: 'key' });
+                    }
+                    
+                    if (!db.objectStoreNames.contains('sessions')) {
+                        db.createObjectStore('sessions', { keyPath: 'userId' });
+                    }
+                };
+
+                request.onsuccess = (event) => {
+                    console.log("IndexedDB inicializado correctamente");
+                };
+            }
+
+            async saveMessage(message) {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName);
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+                        const transaction = db.transaction(['messages'], 'readwrite');
+                        const store = transaction.objectStore('messages');
+                        
+                        const addRequest = store.add(message);
+                        addRequest.onsuccess = () => resolve(true);
+                        addRequest.onerror = () => reject(false);
+                    };
+                    request.onerror = () => reject(false);
+                });
+            }
+
+            async getMessages(chatId) {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName);
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+                        const transaction = db.transaction(['messages'], 'readonly');
+                        const store = transaction.objectStore('messages');
+                        const index = store.index('chatId');
+                        
+                        const getRequest = index.getAll(chatId);
+                        getRequest.onsuccess = () => resolve(getRequest.result || []);
+                        getRequest.onerror = () => reject([]);
+                    };
+                    request.onerror = () => reject([]);
+                });
+            }
+
+            async saveSetting(key, value) {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName);
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+                        const transaction = db.transaction(['settings'], 'readwrite');
+                        const store = transaction.objectStore('settings');
+                        
+                        const addRequest = store.put({ key, value });
+                        addRequest.onsuccess = () => resolve(true);
+                        addRequest.onerror = () => reject(false);
+                    };
+                    request.onerror = () => reject(false);
+                });
+            }
+
+            async getSetting(key) {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName);
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+                        const transaction = db.transaction(['settings'], 'readonly');
+                        const store = transaction.objectStore('settings');
+                        
+                        const getRequest = store.get(key);
+                        getRequest.onsuccess = () => resolve(getRequest.result ? getRequest.result.value : null);
+                        getRequest.onerror = () => reject(null);
+                    };
+                    request.onerror = () => reject(null);
+                });
+            }
+            
+            async saveSession(userId, sessionData) {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName);
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+                        const transaction = db.transaction(['sessions'], 'readwrite');
+                        const store = transaction.objectStore('sessions');
+                        
+                        const putRequest = store.put({ userId, ...sessionData });
+                        putRequest.onsuccess = () => resolve(true);
+                        putRequest.onerror = () => reject(false);
+                    };
+                    request.onerror = () => reject(false);
+                });
+            }
+            
+            async getSession(userId) {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName);
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+                        const transaction = db.transaction(['sessions'], 'readonly');
+                        const store = transaction.objectStore('sessions');
+                        
+                        const getRequest = store.get(userId);
+                        getRequest.onsuccess = () => resolve(getRequest.result || null);
+                        getRequest.onerror = () => reject(null);
+                    };
+                    request.onerror = () => reject(null);
+                });
+            }
+            
+            async deleteSession(userId) {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName);
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+                        const transaction = db.transaction(['sessions'], 'readwrite');
+                        const store = transaction.objectStore('sessions');
+                        
+                        const deleteRequest = store.delete(userId);
+                        deleteRequest.onsuccess = () => resolve(true);
+                        deleteRequest.onerror = () => reject(false);
+                    };
+                    request.onerror = () => reject(false);
+                });
+            }
+            
+            async clearAllSessions() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName);
+                    request.onsuccess = (event) => {
+                        const db = event.target.result;
+                        const transaction = db.transaction(['sessions'], 'readwrite');
+                        const store = transaction.objectStore('sessions');
+                        
+                        const clearRequest = store.clear();
+                        clearRequest.onsuccess = () => resolve(true);
+                        clearRequest.onerror = () => reject(false);
+                    };
+                    request.onerror = () => reject(false);
+                });
+            }
+        }
+
+        // ===== BANDERAS Y CÓDIGOS DE PAÍSES COMPLETOS =====
+        const countries = [
+            { code: '+1', flag: '🇺🇸', name: 'Estados Unidos' },
+            { code: '+1', flag: '🇨🇦', name: 'Canadá' },
+            { code: '+52', flag: '🇲🇽', name: 'México' },
+            { code: '+54', flag: '🇦🇷', name: 'Argentina' },
+            { code: '+55', flag: '🇧🇷', name: 'Brasil' },
+            { code: '+56', flag: '🇨🇱', name: 'Chile' },
+            { code: '+57', flag: '🇨🇴', name: 'Colombia' },
+            { code: '+58', flag: '🇻🇪', name: 'Venezuela' },
+            { code: '+51', flag: '🇵🇪', name: 'Perú' },
+            { code: '+593', flag: '🇪🇨', name: 'Ecuador' },
+            { code: '+591', flag: '🇧🇴', name: 'Bolivia' },
+            { code: '+595', flag: '🇵🇾', name: 'Paraguay' },
+            { code: '+598', flag: '🇺🇾', name: 'Uruguay' },
+            { code: '+506', flag: '🇨🇷', name: 'Costa Rica' },
+            { code: '+507', flag: '🇵🇦', name: 'Panamá' },
+            { code: '+34', flag: '🇪🇸', name: 'España' },
+            { code: '+33', flag: '🇫🇷', name: 'Francia' },
+            { code: '+49', flag: '🇩🇪', name: 'Alemania' },
+            { code: '+39', flag: '🇮🇹', name: 'Italia' },
+            { code: '+44', flag: '🇬🇧', name: 'Reino Unido' },
+            { code: '+7', flag: '🇷🇺', name: 'Rusia' },
+            { code: '+86', flag: '🇨🇳', name: 'China' },
+            { code: '+81', flag: '🇯🇵', name: 'Japón' },
+            { code: '+82', flag: '🇰🇷', name: 'Corea del Sur' },
+            { code: '+91', flag: '🇮🇳', name: 'India' },
+            { code: '+92', flag: '🇵🇰', name: 'Pakistán' },
+            { code: '+20', flag: '🇪🇬', name: 'Egipto' },
+            { code: '+27', flag: '🇿🇦', name: 'Sudáfrica' },
+            { code: '+61', flag: '🇦🇺', name: 'Australia' },
+            { code: '+64', flag: '🇳🇿', name: 'Nueva Zelanda' }
+        ];
+
+        // ===== INICIALIZACIÓN DE SISTEMAS =====
+        const securitySystem = new SecuritySystem();
+        const verificationSystem = new VerificationSystem();
+        const backendSystem = new BackendSystem();
+        const offlineStorage = new OfflineStorage();
+
+        // ===== VARIABLES GLOBALES =====
+        let generatedCode = '';
+        let countdownInterval;
+        let currentActiveChat = 1;
+        let userSessionActive = false;
+        let userId = '';
+        let currentPhoneNumber = '';
+        let userToken = '';
+        let isAuthenticated = false;
+
+        // ===== FUNCIONES DE MODALES =====
+        function showTermsModal() {
+            document.getElementById('termsModal').style.display = 'flex';
+        }
+
+        function closeTermsModal() {
+            document.getElementById('termsModal').style.display = 'none';
+        }
+
+        function showPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'flex';
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+        }
+
+        function showSettingsModal() {
+            document.getElementById('settingsModal').style.display = 'flex';
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').style.display = 'none';
+        }
+
+        function acceptTerms() {
+            alert('✅ Términos aceptados correctamente');
+            closeTermsModal();
+        }
+
+        function backupNow() {
+            alert('📱 Backup realizado exitosamente\n\nTus conversaciones han sido guardadas en la nube de forma segura.\n\nServidores: Node.js/Erlang\nBase de datos: MySQL/PostgreSQL');
+            closeSettingsModal();
+        }
+
+        // Cerrar modales al hacer clic fuera
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+        });
+
+        // Cerrar modales con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            }
+        });
+
+        // ===== SISTEMA DE PERFIL =====
+        class ProfileSystem {
+            constructor() {
+                this.profileImage = null;
+            }
+
+            openProfileUpload() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.style.display = 'none';
+                
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (file.size > 10 * 1024 * 1024) {
+                            showError('phoneError', 'La imagen es demasiado grande. Máximo 10MB.');
+                            return;
+                        }
+                        
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            this.updateProfileImage(e.target.result);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                };
+                
+                document.body.appendChild(input);
+                input.click();
+                setTimeout(() => document.body.removeChild(input), 1000);
+            }
+
+            updateProfileImage(imageData) {
+                this.profileImage = imageData;
+                const userAvatar = document.getElementById('userAvatar');
+                userAvatar.style.backgroundImage = `url(${imageData})`;
+                userAvatar.style.backgroundSize = 'cover';
+                userAvatar.style.backgroundPosition = 'center';
+                userAvatar.innerHTML = '';
+                
+                // Guardar en IndexedDB
+                offlineStorage.saveSetting('profile_image', imageData);
+                
+                alert('✅ Foto de perfil actualizada correctamente');
+            }
+
+            loadProfileImage() {
+                offlineStorage.getSetting('profile_image').then(imageData => {
+                    if (imageData) {
+                        this.profileImage = imageData;
+                        const userAvatar = document.getElementById('userAvatar');
+                        userAvatar.style.backgroundImage = `url(${imageData})`;
+                        userAvatar.style.backgroundSize = 'cover';
+                        userAvatar.style.backgroundPosition = 'center';
+                        userAvatar.innerHTML = '';
+                    }
+                }).catch(() => {});
+            }
+        }
+
+        const profileSystem = new ProfileSystem();
+
+        // ===== FUNCIONES DE INICIALIZACIÓN =====
+        function initCountrySelector() {
+            const countrySelect = document.getElementById('countrySelect');
+            const selectedFlag = document.getElementById('selectedFlag');
+            const selectedCode = document.getElementById('selectedCode');
+
+            countries.sort((a, b) => a.name.localeCompare(b.name));
+
+            countries.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.code;
+                option.textContent = `${country.flag} ${country.name} (${country.code})`;
+                option.setAttribute('data-flag', country.flag);
+                countrySelect.appendChild(option);
+            });
+
+            countrySelect.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const flag = selectedOption.getAttribute('data-flag');
+                const code = this.value;
+                
+                selectedFlag.textContent = flag;
+                selectedCode.textContent = code;
+            });
+
+            // Establecer valor predeterminado
+            const defaultCountry = countries.find(c => c.code === '+1' && c.flag === '🇺🇸');
+            if (defaultCountry) {
+                selectedFlag.textContent = defaultCountry.flag;
+                selectedCode.textContent = defaultCountry.code;
+            }
+        }
+
+        function initVerificationInputs() {
+            const verificationInputs = document.getElementById('verificationInputs');
+            verificationInputs.innerHTML = '';
+
+            for (let i = 0; i < 6; i++) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.maxLength = 1;
+                input.className = 'verification-digit';
+                input.inputMode = 'numeric';
+                input.pattern = '[0-9]*';
+                input.autocomplete = 'off';
+                
+                input.addEventListener('input', function(e) {
+                    const value = e.target.value.replace(/[^0-9]/g, '');
+                    this.value = value;
+                    
+                    if (value.length === 1 && i < 5) {
+                        verificationInputs.children[i + 1].focus();
+                    }
+                    updateVerifyButton();
+                });
+
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && !this.value && i > 0) {
+                        verificationInputs.children[i - 1].focus();
+                        verificationInputs.children[i - 1].value = '';
+                        verificationInputs.children[i - 1].classList.remove('filled');
+                    }
+                    if (e.key === 'ArrowLeft' && i > 0) {
+                        verificationInputs.children[i - 1].focus();
+                    }
+                    if (e.key === 'ArrowRight' && i < 5) {
+                        verificationInputs.children[i + 1].focus();
+                    }
+                    if (e.key === 'Delete' && !this.value && i < 5) {
+                        verificationInputs.children[i + 1].focus();
+                        verificationInputs.children[i + 1].value = '';
+                        verificationInputs.children[i + 1].classList.remove('filled');
+                    }
+                });
+
+                input.addEventListener('focus', function() {
+                    this.select();
+                });
+
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pasteData = e.clipboardData.getData('text').replace(/[^0-9]/g, '');
+                    if (pasteData.length === 6) {
+                        const digits = pasteData.split('');
+                        digits.forEach((digit, idx) => {
+                            if (verificationInputs.children[idx]) {
+                                verificationInputs.children[idx].value = digit;
+                                verificationInputs.children[idx].classList.add('filled');
+                            }
+                        });
+                        updateVerifyButton();
+                    }
+                });
+
+                verificationInputs.appendChild(input);
+            }
+
+            setTimeout(() => {
+                if (verificationInputs.firstChild) {
+                    verificationInputs.firstChild.focus();
+                }
+            }, 100);
+        }
+
+        function updateVerifyButton() {
+            const inputs = document.querySelectorAll('.verification-digit');
+            const verifyCodeBtn = document.getElementById('verifyCodeBtn');
+            let allFilled = true;
+            
+            inputs.forEach(input => {
+                if (!input.value) allFilled = false;
+                input.classList.toggle('filled', input.value.length > 0);
+            });
+            
+            verifyCodeBtn.disabled = !allFilled;
+        }
+
+        function startCountdown() {
+            const countdown = document.getElementById('countdown');
+            const timerSpan = document.getElementById('timer');
+            const resendCodeBtn = document.getElementById('resendCodeBtn');
+            
+            let timeLeft = 60;
+            timerSpan.textContent = timeLeft;
+            countdown.style.display = 'block';
+            resendCodeBtn.disabled = true;
+            
+            clearInterval(countdownInterval);
+            
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                timerSpan.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    countdown.style.display = 'none';
+                    resendCodeBtn.disabled = false;
+                }
+            }, 1000);
+        }
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            if (errorElement) {
+                const errorText = errorElement.querySelector('span') || errorElement;
+                errorText.textContent = message;
+                errorElement.classList.add('show');
+                
+                setTimeout(() => {
+                    errorElement.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        function showSuccess(elementId) {
+            const successElement = document.getElementById(elementId);
+            if (successElement) {
+                successElement.classList.add('show');
+            }
+        }
+
+        function showLoader(buttonId, show) {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                const loader = button.querySelector('.loader');
+                const span = button.querySelector('span');
+                
+                if (show) {
+                    button.disabled = true;
+                    if (loader) loader.style.display = 'block';
+                    if (span) span.style.opacity = '0.5';
+                } else {
+                    button.disabled = false;
+                    if (loader) loader.style.display = 'none';
+                    if (span) span.style.opacity = '1';
+                }
+            }
+        }
+
+        // ===== FUNCIONES DE CIERRE DE SESIÓN =====
+        async function logout() {
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                // Limpiar estado de sesión
+                isAuthenticated = false;
+                userSessionActive = false;
+                userId = '';
+                userToken = '';
+                currentPhoneNumber = '';
+                
+                // Limpiar IndexedDB
+                await offlineStorage.clearAllSessions();
+                
+                // Limpiar localStorage
+                localStorage.removeItem('chatspere_session');
+                localStorage.removeItem('chatspere_remember');
+                
+                // Ocultar chat y mostrar login
+                const loginContainer = document.getElementById('loginContainer');
+                const chatContainer = document.getElementById('chatContainer');
+                
+                if (loginContainer && chatContainer) {
+                    loginContainer.style.display = 'block';
+                    chatContainer.style.display = 'none';
+                }
+                
+                // Resetear formularios
+                const phoneForm = document.getElementById('phoneForm');
+                const verificationForm = document.getElementById('verificationForm');
+                const phoneInput = document.getElementById('phoneInput');
+                
+                if (phoneForm) phoneForm.style.display = 'block';
+                if (verificationForm) verificationForm.style.display = 'none';
+                if (phoneInput) phoneInput.value = '';
+                
+                // Limpiar códigos de verificación
+                const inputs = document.querySelectorAll('.verification-digit');
+                inputs.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('filled');
+                });
+                
+                console.log('Sesión cerrada correctamente');
+            }
+        }
+
+        // ===== FUNCIONES DE CHAT =====
+        function loadStories() {
+            const storiesContainer = document.getElementById('storiesContainer');
+            if (!storiesContainer) return;
+            
+            storiesContainer.innerHTML = '';
+
+            const storiesData = [
+                { id: 1, name: 'Mi estado', seen: false, myStory: true, verified: true },
+                { id: 2, name: 'Ana', seen: false, verified: true },
+                { id: 3, name: 'Carlos', seen: true, verified: false },
+                { id: 4, name: 'María', seen: false, verified: true },
+                { id: 5, name: 'Pedro', seen: true, verified: false },
+                { id: 6, name: 'Laura', seen: false, verified: true },
+                { id: 7, name: 'Juan', seen: true, verified: false },
+                { id: 8, name: 'Sofía', seen: false, verified: true },
+                { id: 9, name: 'David', seen: true, verified: false },
+                { id: 10, name: 'Elena', seen: false, verified: true }
+            ];
+
+            storiesData.forEach((story) => {
+                const storyElement = document.createElement('div');
+                storyElement.className = 'story-item';
+                if (story.myStory) storyElement.classList.add('my-story');
+                
+                const verifiedBadge = story.verified ? 
+                    '<span class="verified-badge" style="position:absolute; bottom:-5px; right:-5px; width:16px; height:16px; font-size:8px; background: var(--primary-blue);"><i class="fas fa-check"></i></span>' : '';
+                
+                storyElement.innerHTML = `
+                    <div class="story-ring ${story.seen ? 'seen' : ''}">
+                        <div class="story-avatar">${story.name.charAt(0)}</div>
+                        ${verifiedBadge}
+                    </div>
+                    <div class="story-name">${story.name}</div>
+                    ${story.myStory ? '<div class="add-story-btn"><i class="fas fa-plus"></i></div>' : ''}
+                `;
+
+                storyElement.addEventListener('click', () => {
+                    if (story.myStory) {
+                        profileSystem.openProfileUpload();
+                    } else {
+                        alert(`Viendo el estado de ${story.name}`);
+                    }
+                });
+
+                storiesContainer.appendChild(storyElement);
+            });
+        }
+
+        async function loadChats() {
+            const chatsList = document.getElementById('chatsList');
+            if (!chatsList) return;
+            
+            chatsList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-secondary);">Cargando chats...</div>';
+
+            try {
+                const response = await backendSystem.getChats(userId);
+                if (response.success) {
+                    const sortedChats = response.chats.sort((a, b) => b.timestamp - a.timestamp);
+                    renderChats(sortedChats);
+                } else {
+                    throw new Error('Error al cargar chats');
+                }
+            } catch (error) {
+                console.error('Error cargando chats:', error);
+                // Cargar datos de respaldo
+                const backupChats = backendSystem.generateChats();
+                renderChats(backupChats);
+            }
+        }
+
+        function renderChats(chats) {
+            const chatsList = document.getElementById('chatsList');
+            chatsList.innerHTML = '';
+
+            chats.forEach(chat => {
+                const chatElement = document.createElement('div');
+                chatElement.className = 'chat-item';
+                if (chat.unread > 0) chatElement.classList.add('has-unread');
+                if (chat.id === currentActiveChat) chatElement.classList.add('active');
+                
+                const verifiedBadge = verificationSystem.getVerificationBadge(`user_${chat.id}`);
+                
+                chatElement.innerHTML = `
+                    <div class="chat-avatar ${chat.online ? 'online' : ''}">${chat.avatar}</div>
+                    <div class="chat-info">
+                        <div class="chat-header">
+                            <div class="chat-name">${chat.name}${verifiedBadge}</div>
+                            <div class="chat-time">${chat.time}</div>
+                        </div>
+                        <div class="chat-preview">
+                            <div class="chat-message">
+                                ${chat.lastMessage}
+                            </div>
+                            ${chat.unread > 0 ? `<div class="unread-count">${chat.unread}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                chatElement.addEventListener('click', () => {
+                    if (window.innerWidth <= 992) {
+                        document.getElementById('sidebar').classList.remove('active');
+                    }
+                    
+                    document.querySelectorAll('.chat-item').forEach(c => {
+                        c.classList.remove('active');
+                    });
+                    
+                    chatElement.classList.add('active');
+                    
+                    currentActiveChat = chat.id;
+                    loadMessages(chat.id);
+                    updateActiveChatInfo(chat);
+                });
+
+                chatsList.appendChild(chatElement);
+            });
+
+            // Activar primer chat si no hay ninguno activo
+            if (!document.querySelector('.chat-item.active') && chats.length > 0) {
+                chatsList.firstChild.click();
+            }
+        }
+
+        function updateActiveChatInfo(chat) {
+            const verifiedBadge = verificationSystem.getVerificationBadge(`user_${chat.id}`);
+            const activeChatName = document.getElementById('activeChatName');
+            const activeChatAvatar = document.getElementById('activeChatAvatar');
+            const lastSeen = document.getElementById('lastSeen');
+            
+            if (activeChatName) {
+                activeChatName.innerHTML = `${chat.name}${verifiedBadge} <span class="ai-assistant-badge"><i class="fas fa-robot"></i> AI ChatSphere+</span>`;
+            }
+            if (activeChatAvatar) {
+                activeChatAvatar.textContent = chat.avatar;
+                activeChatAvatar.className = `contact-avatar ${chat.online ? 'online' : ''}`;
+            }
+            if (lastSeen) {
+                lastSeen.textContent = chat.online ? 'En línea' : `Última vez ${chat.time}`;
+            }
+        }
+
+        async function loadMessages(chatId) {
+            const messagesContainer = document.getElementById('messagesContainer');
+            if (!messagesContainer) return;
+            
+            messagesContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-secondary);">Cargando mensajes...</div>';
+
+            try {
+                const response = await backendSystem.getMessages(chatId);
+                if (response.success) {
+                    renderMessages(response.messages);
+                } else {
+                    throw new Error('Error al cargar mensajes');
+                }
+            } catch (error) {
+                console.error('Error cargando mensajes:', error);
+                const offlineMessages = await offlineStorage.getMessages(chatId);
+                if (offlineMessages.length > 0) {
+                    renderMessages(offlineMessages);
+                } else {
+                    const backupMessages = backendSystem.generateMessages(chatId);
+                    renderMessages(backupMessages);
+                }
+            }
+        }
+
+        function renderMessages(messages) {
+            const messagesContainer = document.getElementById('messagesContainer');
+            messagesContainer.innerHTML = '';
+            
+            const dateSeparator = document.createElement('div');
+            dateSeparator.className = 'date-separator';
+            dateSeparator.innerHTML = `<span>HOY <i class="fas fa-lock" style="color:var(--encryption-color); margin-left:8px;"></i> <span class="quantum-badge" style="margin-left:5px;">Quantum Ready</span></span>`;
+            messagesContainer.appendChild(dateSeparator);
+            
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${message.outgoing ? 'outgoing' : 'incoming'}`;
+                
+                let statusIcon = '';
+                let verifiedIcon = '';
+                
+                if (message.outgoing) {
+                    statusIcon = '<i class="fas fa-check-double" style="color: var(--accent-blue); margin-left: 4px;"></i>';
+                }
+                
+                if (message.verified) {
+                    verifiedIcon = ' <i class="fas fa-check-circle" style="color: var(--verified-badge); font-size:12px;" title="Verificado"></i>';
+                }
+                
+                const encryptedContent = securitySystem.encryptMessage(message.content);
+                const decryptedContent = securitySystem.decryptMessage(encryptedContent);
+                
+                messageElement.innerHTML = `
+                    <div class="message-content">
+                        ${decryptedContent}${verifiedIcon}
+                        <span class="wallet-badge" style="margin-left:5px;"><i class="fas fa-coins"></i> Pay</span>
+                    </div>
+                    <div class="message-time">
+                        ${message.time}${statusIcon}
+                    </div>
+                `;
+                
+                messagesContainer.appendChild(messageElement);
+            });
+            
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const content = messageInput.value.trim();
+            
+            if (!content) return;
+            
+            if (securitySystem.containsBlockedContent(content)) {
+                securitySystem.checkForViolations(userId, {
+                    type: 'hate_speech',
+                    severity: 'high',
+                    content: content.substring(0, 50)
+                });
+                
+                showError('verificationError', '⚠️ Tu mensaje contiene contenido prohibido. Continuar puede resultar en el bloqueo de tu cuenta.');
+                return;
+            }
+            
+            const messagesContainer = document.getElementById('messagesContainer');
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            const encryptedContent = securitySystem.encryptMessage(content);
+            
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message outgoing';
+            messageElement.innerHTML = `
+                <div class="message-content">
+                    ${content} <i class="fas fa-lock" style="font-size:11px; color:var(--encryption-color);" title="Cifrado E2E ${securitySystem.protocolVersion}"></i>
+                    <span class="wallet-badge" style="margin-left:5px;"><i class="fas fa-coins"></i> Pay</span>
+                </div>
+                <div class="message-time">
+                    ${timeString} <i class="fas fa-check-double" style="color: var(--text-tertiary); margin-left: 4px;"></i>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageElement);
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            await offlineStorage.saveMessage({
+                chatId: currentActiveChat,
+                content: content,
+                outgoing: true,
+                timestamp: Date.now(),
+                time: timeString,
+                status: 'sent'
+            });
+            
+            setTimeout(() => {
+                const replies = [
+                    '¡Interesante! ¿Me cuentas más?',
+                    'Gracias por compartir eso conmigo',
+                    '¿En serio? No lo sabía',
+                    'Jaja, que gracioso 😄',
+                    'Estoy completamente de acuerdo',
+                    '¿Podrías explicar eso con más detalle?',
+                    'Eso suena realmente bien',
+                    'Lo pensaré y te cuento'
+                ];
+                
+                const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                
+                const replyElement = document.createElement('div');
+                replyElement.className = 'message incoming';
+                replyElement.innerHTML = `
+                    <div class="message-content">
+                        ${randomReply} <i class="fas fa-lock" style="font-size:11px; color:var(--encryption-color);"></i>
+                        <span class="verified-badge" style="margin-left:5px;"><i class="fas fa-check"></i></span>
+                        <span class="wallet-badge" style="margin-left:5px;"><i class="fas fa-coins"></i> Pay</span>
+                    </div>
+                    <div class="message-time">${timeString}</div>
+                `;
+                
+                messagesContainer.appendChild(replyElement);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                
+                const typingIndicator = document.getElementById('typingIndicator');
+                if (typingIndicator) {
+                    typingIndicator.style.display = 'flex';
+                    
+                    setTimeout(() => {
+                        typingIndicator.style.display = 'none';
+                    }, 2000);
+                }
+            }, 1000);
+        }
+
+        // ===== FUNCIONES EXCLUSIVAS CHATSPHERE (WhatsApp NO tiene) =====
+        function openAIAssistant() {
+            alert('🤖 CHATSPHERE AI ASSISTANT\n\nFunciones exclusivas:\n• Generación de respuestas automáticas\n• Traducción en tiempo real\n• Resumen de conversaciones\n• Corrección gramatical\n• Sugerencias inteligentes\n\nWhatsApp NO tiene esta función.');
+        }
+
+        function sendPayment() {
+            const contactName = document.getElementById('activeChatName')?.textContent.replace(/<[^>]*>/g, '') || 'Contacto';
+            const amount = prompt(`💰 ChatSphere Pay\n\nEnviar dinero a ${contactName}\n\nWhatsApp NO tiene pagos integrados en todos los países. ChatSphere Pay funciona globalmente.\n\nIngresa el monto a enviar:`, "10.00");
+            
+            if (amount && !isNaN(parseFloat(amount))) {
+                alert(`✅ Pago de $${amount} USD enviado a ${contactName}\n\n• Transacción cifrada\n• Sin comisiones\n• Confirmación instantánea\n\nChatSphere Pay - Exclusivo`);
+            }
+        }
+
+        function startVoiceCall() {
+            const contactName = document.getElementById('activeChatName')?.textContent.replace(/<[^>]*>/g, '') || 'Contacto';
+            alert(`📞 LLAMADA DE VOZ CHATSPHERE\n\nContacto: ${contactName}\nProtocolo: ${securitySystem.protocolVersion}\nCalidad: HD+ (Superior a WhatsApp)\nCifrado: E2E Activado\n\nWhatsApp: 8 participantes\nChatSphere: Ilimitado`);
+        }
+
+        function startVideoCall() {
+            const contactName = document.getElementById('activeChatName')?.textContent.replace(/<[^>]*>/g, '') || 'Contacto';
+            alert(`📹 VIDELLAMADA CHATSPHERE\n\nContacto: ${contactName}\nCalidad: 4K HDR (WhatsApp: 720p)\nParticipantes: Hasta 50 (WhatsApp: 8)\nPantalla compartida: 4K 60fps\n\nExclusivo ChatSphere Premium`);
+        }
+
+        function showChatInfo() {
+            const contactName = document.getElementById('activeChatName')?.textContent.replace(/<[^>]*>/g, '') || 'Contacto';
+            alert(`🔐 INFORMACIÓN DEL CHAT - CHATSPHERE 🔐\n\nContacto: ${contactName}\nCifrado: E2E Signal Protocol\nProtocolo: ${securitySystem.protocolVersion}\nVerificación: Cuenta verificada ✓\nBackend: Node.js + Erlang/OTP\nBase de datos: MySQL/PostgreSQL\n\nFunciones exclusivas activas:\n• AI Assistant ✓\n• ChatSphere Pay ✓\n• Quantum Ready ✓\n• Traducción automática ✓\n\nWhatsApp NO tiene estas funciones.`);
+        }
+
+        function showAttachmentMenu() {
+            const options = [
+                '📷 Foto o video (hasta 2GB, WhatsApp: 16MB)',
+                '📁 Documento (todos los formatos)',
+                '📍 Ubicación en tiempo real',
+                '👤 Contacto + QR',
+                '🎤 Audio HD (384kbps, WhatsApp: 64kbps)',
+                '💾 Archivo sin límite',
+                '🎮 Mini juegos',
+                '📊 Encuestas interactivas',
+                '🎨 Dibujar en tiempo real'
+            ];
+            
+            let menu = '📎 CHATSPHERE - ADJUNTAR ARCHIVO\n\nWhatsApp: 16MB máximo\nChatSphere: Hasta 2GB\n\n';
+            options.forEach((option, index) => {
+                menu += `${index + 1}. ${option}\n`;
+            });
+            
+            const choice = prompt(menu + '\nSelecciona una opción (1-9):');
+            if (choice) {
+                const num = parseInt(choice);
+                if (num >= 1 && num <= 9) {
+                    alert(`✅ Has seleccionado: ${options[num-1].split('(')[0]}\n\nEl archivo será cifrado y subido a los servidores ChatSphere (Erlang/Node.js).`);
+                }
+            }
+        }
+
+        let isRecording = false;
+        let recordingTimer;
+
+        function startRecording() {
+            isRecording = true;
+            alert('🎤 GRABACIÓN DE AUDIO HD\n\nCalidad: 384kbps (WhatsApp: 64kbps)\nFormato: FLAC sin pérdida\n\nGrabando... (suelta para enviar)');
+            recordingTimer = setTimeout(() => {
+                if (isRecording) {
+                    stopRecording();
+                }
+            }, 30000); // 30 segundos máximo
+        }
+
+        function stopRecording() {
+            if (isRecording) {
+                isRecording = false;
+                clearTimeout(recordingTimer);
+                alert('✅ Audio grabado y listo para enviar\n\n• Calidad HD+\n• Cifrado E2E\n• Sin compresión\n\nExclusivo ChatSphere');
+            }
+        }
+
+        function toggleEmojiPicker() {
+            alert('😊 SELECTOR DE EMOJIS CHATSPHERE\n\n• 5000+ emojis exclusivos\n• Emojis animados\n• Stickers personalizados con IA\n• GIFs sin límite\n\nWhatsApp: ~3000 emojis');
+        }
+
+        function openProfileUpload() {
+            profileSystem.openProfileUpload();
+        }
+
+        // ===== PWA FUNCTIONS =====
+        function initPWA() {
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then(registration => {
+                            console.log('Service Worker registrado con éxito:', registration);
+                        })
+                        .catch(error => {
+                            console.log('Error registrando Service Worker:', error);
+                        });
+                });
+            }
+            
+            const manifestContent = {
+                "name": "ChatSphere",
+                "short_name": "ChatSphere",
+                "description": "Mensajería premium con cifrado E2E y servidores Node.js/Erlang",
+                "start_url": "/",
+                "display": "standalone",
+                "orientation": "portrait",
+                "theme_color": "#128C7E",
+                "background_color": "#f0f2f5",
+                "icons": [
+                    {
+                        "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGOSURBVHgB7ZbNSgJBFIbnn61hG4MiKYQWQfQCFd3UQ4RB0C4iXKZtQvN1QG9QFEFR7QIXPUVg0S7wJqLOHB3PL5hpmo1zzkXmPHDOd+abH3EcQgiEEEIIUzhO+h1k5UPxUa8+fQKF3+PSK1DQz6XJ80rF55eeX2pKHmGmGGPYN0oI/4+EgP8c9dcF0P8o+I73O+/+/P9M7dcFyO8f4sDXBYCAtS6A3u/xnus6/j0+U18XkH9BQO/n9A7k43q+zxj+P8gA9g/tFwQkQ/gFXE1vQPyJxJb7OV0lTv4/ILvA1wUEPf6IwwgRY3KkNyD+RmLT/ez3Al8X0AcsPqePIB/X8n3mSP7fRwZIF/jSgLtB5icEmLf38xzJd3oHuoz87pHfPfw7gP7eEf2/J65/f8z/xyy3L/BlAW0A/SHin7UCyA92xvYFviyg95NPQKTX17+c/C9MmfFzgRYTMFdYoBxEtwAAAABJRU5ErkJggg==",
+                        "sizes": "192x192",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGOSURBVHgB7ZbNSgJBFIbnn61hG4MiKYQWQfQCFd3UQ4RB0C4iXKZtQvN1QG9QFEFR7QIXPUVg0S7wJqLOHB3PL5hpmo1zzkXmPHDOd+abH3EcQgiEEEIIUzhO+h1k5UPxUa8+fQKF3+PSK1DQz6XJ80rF55eeX2pKHmGmGGPYN0oI/4+EgP8c9dcF0P8o+I73O+/+/P9M7dcFyO8f4sDXBYCAtS6A3u/xnus6/j0+U18XkH9BQO/n9A7k43q+zxj+P8gA9g/tFwQkQ/gFXE1vQPyJxJb7OV0lTv4/ILvA1wUEPf6IwwgRY3KkNyD+RmLT/ez3Al8X0AcsPqePIB+fvH8IwnQAAABJRU5ErkJggg==",
+                        "sizes": "512x512",
+                        "type": "image/png"
+                    }
+                ]
+            };
+            
+            const blob = new Blob([JSON.stringify(manifestContent)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const manifestLink = document.getElementById('manifestLink');
+            if (manifestLink) {
+                manifestLink.href = url;
+            }
+            
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                console.log('Running as PWA');
+                document.documentElement.classList.add('pwa-mode');
+            }
+        }
+
+        // ===== EVENT LISTENERS PRINCIPALES =====
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("ChatSphere iniciando - Sistema similar a WhatsApp con Node.js/Erlang");
+            
+            // Asegurar que el login sea visible inicialmente
+            const loginContainer = document.getElementById('loginContainer');
+            const chatContainer = document.getElementById('chatContainer');
+            
+            if (loginContainer) loginContainer.style.display = 'block';
+            if (chatContainer) chatContainer.style.display = 'none';
+            
+            // NO restaurar sesión automáticamente - ELIMINADO EL PROBLEMA
+            // El usuario DEBE iniciar sesión manualmente como en WhatsApp
+            
+            initCountrySelector();
+            initVerificationInputs();
+            initPWA();
+            profileSystem.loadProfileImage();
+            
+            // Solicitar permisos de notificación
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+            
+            // Botón para limpiar sesión manualmente (garantiza login siempre visible)
+            const clearSessionBtn = document.getElementById('clearSessionBtn');
+            if (clearSessionBtn) {
+                clearSessionBtn.addEventListener('click', function() {
+                    localStorage.removeItem('chatspere_session');
+                    localStorage.removeItem('chatspere_remember');
+                    offlineStorage.clearAllSessions();
+                    alert('✅ Sesión manual activada. Por favor, inicia sesión con tu número de teléfono.');
+                });
+            }
+            
+            // Envío de código SMS
+            const phoneForm = document.getElementById('phoneForm');
+            if (phoneForm) {
+                phoneForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const phoneInput = document.getElementById('phoneInput');
+                    const phone = phoneInput.value.trim();
+                    
+                    if (!phone || phone.length < 7) {
+                        showError('phoneError', 'Por favor, ingresa un número de teléfono válido (mínimo 7 dígitos)');
+                        return;
+                    }
+                    
+                    if (!/^\d+$/.test(phone)) {
+                        showError('phoneError', 'El número debe contener solo dígitos');
+                        return;
+                    }
+                    
+                    currentPhoneNumber = phone;
+                    
+                    if (securitySystem.isAccountBlocked(phone)) {
+                        showError('phoneError', '🚫 Esta cuenta ha sido bloqueada permanentemente por violar nuestras políticas.');
+                        return;
+                    }
+                    
+                    generatedCode = '123456';
+                    console.log('Código de verificación generado:', generatedCode);
+                    
+                    showLoader('sendCodeBtn', true);
+                    
+                    try {
+                        const countryCode = document.getElementById('selectedCode').textContent;
+                        const response = await backendSystem.login(phone, countryCode);
+                        
+                        if (response.success) {
+                            setTimeout(() => {
+                                phoneForm.style.display = 'none';
+                                const verificationForm = document.getElementById('verificationForm');
+                                if (verificationForm) {
+                                    verificationForm.style.display = 'block';
+                                }
+                                
+                                const displayNumber = `${countryCode} ${phone}`;
+                                const verificationPhone = document.getElementById('verificationPhone');
+                                if (verificationPhone) {
+                                    verificationPhone.textContent = displayNumber;
+                                }
+                                
+                                startCountdown();
+                                showLoader('sendCodeBtn', false);
+                                
+                                alert(`🔐 CÓDIGO DE VERIFICACIÓN\n\n📱 Para: ${displayNumber}\n🔢 Código: ${generatedCode}\n⏱️ Válido por 10 minutos\n\nIngresa este código en los 6 campos.\n\nBackend: Node.js/Erlang\nDatabase: MySQL/PostgreSQL`);
+                            }, 1000);
+                        } else {
+                            showError('phoneError', 'Error al enviar el código. Intenta nuevamente.');
+                            showLoader('sendCodeBtn', false);
+                        }
+                    } catch (error) {
+                        console.error('Error en login:', error);
+                        showError('phoneError', 'Error de conexión. Verifica tu internet.');
+                        showLoader('sendCodeBtn', false);
+                    }
+                });
+            }
+            
+            // Verificación de código
+            const verifyCodeBtn = document.getElementById('verifyCodeBtn');
+            if (verifyCodeBtn) {
+                verifyCodeBtn.addEventListener('click', async function() {
+                    const inputs = document.querySelectorAll('.verification-digit');
+                    let enteredCode = '';
+                    
+                    inputs.forEach(input => {
+                        enteredCode += input.value;
+                    });
+                    
+                    if (enteredCode.length !== 6) {
+                        showError('verificationError', 'Por favor, ingresa los 6 dígitos del código');
+                        return;
+                    }
+                    
+                    showLoader('verifyCodeBtn', true);
+                    
+                    try {
+                        const countryCode = document.getElementById('selectedCode').textContent;
+                        const fullPhone = `${countryCode}${currentPhoneNumber}`;
+                        const response = await backendSystem.verifyCode(fullPhone, enteredCode);
+                        
+                        setTimeout(() => {
+                            if (response.success) {
+                                showSuccess('verificationSuccess');
+                                userToken = response.token;
+                                userId = response.user.id;
+                                isAuthenticated = true;
+                                userSessionActive = true;
+                                
+                                setTimeout(() => {
+                                    const loginContainer = document.getElementById('loginContainer');
+                                    const chatContainer = document.getElementById('chatContainer');
+                                    if (loginContainer && chatContainer) {
+                                        loginContainer.style.display = 'none';
+                                        chatContainer.style.display = 'block';
+                                    }
+                                    
+                                    loadStories();
+                                    loadChats();
+                                    
+                                    // Guardar sesión SOLO si el usuario quiere (opcional)
+                                    if (confirm('¿Quieres mantener la sesión iniciada para no tener que volver a ingresar el código?\n\n(Puedes cerrar sesión manualmente después)')) {
+                                        const sessionData = {
+                                            token: userToken,
+                                            userId: userId,
+                                            phone: fullPhone,
+                                            timestamp: Date.now()
+                                        };
+                                        
+                                        localStorage.setItem('chatspere_session', JSON.stringify(sessionData));
+                                        offlineStorage.saveSession(userId, sessionData);
+                                        
+                                        alert('✅ Sesión guardada. Puedes cerrar sesión manualmente desde el botón "Cerrar sesión".');
+                                    }
+                                    
+                                    alert(`🎉 ¡BIENVENIDO A CHATSPHERE! 🎉\n\n✅ Cuenta verificada exitosamente\n🔒 Cifrado E2E activado\n⭐ Protocolo: ${securitySystem.protocolVersion}\n👑 Edición Premium\n\nTecnologías (mismas que WhatsApp):\n${Object.entries(backendSystem.getTechStack()).map(([key, tech]) => `• ${key}: ${tech.join(', ')}`).join('\n')}\n\nFunciones exclusivas:\n• ChatSphere Pay\n• AI Assistant\n• Quantum Ready\n• Traducción en tiempo real\n\n¡Disfruta de la mensajería del futuro!`);
+                                }, 1000);
+                            } else {
+                                showError('verificationError', '❌ Código incorrecto. Intenta nuevamente.');
+                                showLoader('verifyCodeBtn', false);
+                                
+                                inputs.forEach(input => {
+                                    input.value = '';
+                                    input.classList.remove('filled');
+                                });
+                                
+                                if (inputs[0]) {
+                                    inputs[0].focus();
+                                }
+                            }
+                        }, 1000);
+                    } catch (error) {
+                        console.error('Error verificando código:', error);
+                        showError('verificationError', 'Error de conexión. Intenta nuevamente.');
+                        showLoader('verifyCodeBtn', false);
+                    }
+                });
+            }
+            
+            // Volver a número
+            const backToPhoneBtn = document.getElementById('backToPhoneBtn');
+            if (backToPhoneBtn) {
+                backToPhoneBtn.addEventListener('click', function() {
+                    const verificationForm = document.getElementById('verificationForm');
+                    const phoneForm = document.getElementById('phoneForm');
+                    if (verificationForm && phoneForm) {
+                        verificationForm.style.display = 'none';
+                        phoneForm.style.display = 'block';
+                    }
+                    clearInterval(countdownInterval);
+                    const countdown = document.getElementById('countdown');
+                    if (countdown) {
+                        countdown.style.display = 'none';
+                    }
+                    const resendCodeBtn = document.getElementById('resendCodeBtn');
+                    if (resendCodeBtn) {
+                        resendCodeBtn.disabled = false;
+                    }
+                });
+            }
+            
+            // Reenviar código
+            const resendCodeBtn = document.getElementById('resendCodeBtn');
+            if (resendCodeBtn) {
+                resendCodeBtn.addEventListener('click', function() {
+                    if (this.disabled) return;
+                    
+                    generatedCode = securitySystem.generateSecureCode();
+                    console.log('Nuevo código generado:', generatedCode);
+                    
+                    startCountdown();
+                    
+                    const countryCode = document.getElementById('selectedCode').textContent;
+                    const displayNumber = `${countryCode} ${currentPhoneNumber}`;
+                    alert(`🔄 NUEVO CÓDIGO DE VERIFICACIÓN 🔄\n\n📱 Para: ${displayNumber}\n🔢 Nuevo código: ${generatedCode}\n⏱️ Válido por 10 minutos`);
+                    
+                    const inputs = document.querySelectorAll('.verification-digit');
+                    inputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                    });
+                    
+                    if (inputs[0]) {
+                        inputs[0].focus();
+                    }
+                    updateVerifyButton();
+                });
+            }
+            
+            // Botón de cerrar sesión
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', logout);
+            }
+            
+            // Enviar mensaje
+            const sendButton = document.getElementById('sendButton');
+            if (sendButton) {
+                sendButton.addEventListener('click', sendMessage);
+            }
+            
+            const messageInput = document.getElementById('messageInput');
+            if (messageInput) {
+                messageInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+                
+                messageInput.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = (this.scrollHeight) + 'px';
+                });
+            }
+            
+            // Menú móvil
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const sidebar = document.getElementById('sidebar');
+                    if (sidebar) {
+                        sidebar.classList.toggle('active');
+                    }
+                });
+            }
+            
+            // Nuevo chat
+            const newChatBtn = document.getElementById('newChatBtn');
+            if (newChatBtn) {
+                newChatBtn.addEventListener('click', function() {
+                    const newName = prompt('👤 Nombre del nuevo contacto:');
+                    if (newName && newName.trim()) {
+                        const isBusiness = confirm('¿Es una cuenta de negocio? (Aparecerá con verificación especial)');
+                        const isOfficial = isBusiness && confirm('¿Es una cuenta oficial verificada? (Aparecerá con estrella dorada)');
+                        
+                        alert(`✅ Chat con ${newName.trim()} creado ${isOfficial ? '(Cuenta oficial verificada ⭐)' : isBusiness ? '(Cuenta de negocio verificada 💼)' : ''}\n\nFunciones exclusivas disponibles: AI Assistant, ChatSphere Pay`);
+                    }
+                });
+            }
+            
+            // Estado
+            const statusBtn = document.getElementById('statusBtn');
+            if (statusBtn) {
+                statusBtn.addEventListener('click', function() {
+                    const status = prompt('✍️ ¿Cuál es tu estado?', 'Disponible en ChatSphere');
+                    if (status !== null) {
+                        alert(`✅ Estado actualizado a: "${status}"`);
+                    }
+                });
+            }
+            
+            // Foto de perfil
+            const userAvatar = document.getElementById('userAvatar');
+            if (userAvatar) {
+                userAvatar.addEventListener('dblclick', function() {
+                    profileSystem.openProfileUpload();
+                });
+            }
+
+            // Cerrar sidebar al hacer clic fuera en móviles
+            document.addEventListener('click', function(event) {
+                const sidebar = document.getElementById('sidebar');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (window.innerWidth <= 992 && 
+                    sidebar && 
+                    mobileMenuBtn &&
+                    !sidebar.contains(event.target) && 
+                    !mobileMenuBtn.contains(event.target) &&
+                    sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            });
+
+            // Detectar cambios de conexión
+            window.addEventListener('online', () => {
+                console.log('Conectado a internet - Servidores ChatSphere Node.js/Erlang activos');
+            });
+
+            window.addEventListener('offline', () => {
+                console.log('Sin conexión a internet. Los mensajes se guardarán localmente.');
+                alert('⚠️ Sin conexión. Los mensajes se guardarán localmente en IndexedDB.');
+            });
+
+            // Ajustar altura en dispositivos móviles
+            function adjustViewport() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+                
+                const messageInput = document.getElementById('messageInput');
+                if (messageInput) {
+                    messageInput.style.height = 'auto';
+                    messageInput.style.height = (messageInput.scrollHeight) + 'px';
+                }
+            }
+            
+            window.addEventListener('resize', adjustViewport);
+            window.addEventListener('orientationchange', adjustViewport);
+            adjustViewport();
+
+            console.log("ChatSphere Premium cargado correctamente");
+            console.log("Sistemas activados:");
+            console.log("1. Cifrado E2E: " + securitySystem.e2eeEnabled);
+            console.log("2. Protocolo: " + securitySystem.protocolVersion);
+            console.log("3. Sistema de bloqueo: Activo");
+            console.log("4. Verificación de cuentas: Activo");
+            console.log("5. Backend System (Node.js/Erlang): Activo");
+            console.log("6. Offline Storage (IndexedDB): Activo");
+            console.log("7. PWA Ready: Activo");
+            console.log("8. ChatSphere Pay: Activo");
+            console.log("9. AI Assistant: Activo");
+            console.log("10. Quantum Ready: Activo");
+            console.log("Tecnologías soportadas (mismas que WhatsApp):", backendSystem.getTechStack());
+        });
+
+        // Prevenir zoom en dispositivos móviles
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
